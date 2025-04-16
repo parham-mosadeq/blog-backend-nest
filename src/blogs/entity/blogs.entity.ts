@@ -14,7 +14,7 @@ export class BlogEntity {
   @Column('text')
   content: string;
 
-  @Column({ length: 20 })
+  @Column({ length: 100 })
   title: string;
 
   @Column()
@@ -23,7 +23,7 @@ export class BlogEntity {
   @Column()
   image: string;
 
-  @Column({ type: 'uuid' })
+  @Column({ type: 'uuid', unique: true })
   slug: string;
 
   @Column()
