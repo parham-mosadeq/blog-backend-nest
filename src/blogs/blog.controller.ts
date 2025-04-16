@@ -1,7 +1,11 @@
+import { BlogService } from './blog.service';
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CreateBlogDto } from './dtos';
 
 @Controller('/api/v1/blogs')
 export class BlogController {
+  constructor(private blogService: BlogService) {}
+
   @Get()
   getAllBlogs() {
     return 'all blogs';
@@ -17,9 +21,11 @@ export class BlogController {
     return `category ${category}`;
   }
 
-  @Post('/create/:id')
+  @Post('/create')
   // * Change the body type (dto)
-  createSingleBlog(@Body() body: Record<string, string>) {
-    return `create blog ${body.name}`;
+  async createSingleBlog(@Body() body: CreateBlogDto) {
+    const createdBlog = await this.blogService.create(body);
+
+    return createdBlog;
   }
 }

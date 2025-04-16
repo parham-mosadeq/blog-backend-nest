@@ -1,8 +1,8 @@
 import {
-  Entity,
   Column,
-  PrimaryGeneratedColumn,
   CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -30,14 +30,14 @@ export class BlogEntity {
   tags: string;
 
   @Column({ type: 'boolean', default: false })
-  published: string;
+  published: boolean;
 
   @Column({ type: 'boolean', default: true })
-  isDraft: string;
+  isDraft: boolean;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 }

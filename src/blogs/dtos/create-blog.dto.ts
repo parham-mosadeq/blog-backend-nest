@@ -1,27 +1,43 @@
-import { IsBoolean, IsString, IsUUID } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+  Length,
+} from 'class-validator';
 
 export class CreateBlogDto {
+  @IsNotEmpty()
+  @IsString()
+  @Length(1, 100)
+  title: string;
+
+  @IsNotEmpty()
   @IsString()
   content: string;
 
-  @IsString()
-  title: string;
-
+  @IsNotEmpty()
   @IsString()
   author: string;
 
+  @IsNotEmpty()
   @IsString()
   image: string;
 
+  @IsNotEmpty()
   @IsUUID()
   slug: string;
 
+  @IsNotEmpty()
   @IsString()
   tags: string;
 
   @IsBoolean()
-  published: boolean;
+  @IsOptional()
+  published: boolean = false;
 
   @IsBoolean()
-  isDraft: boolean;
+  @IsOptional()
+  isDraft: boolean = true;
 }
