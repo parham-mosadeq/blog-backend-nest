@@ -45,7 +45,7 @@ export class BlogService {
     return this.find(id);
   }
 
-  async create(data: CreateBlogDto): Promise<BlogEntity> {
+  async create(data: Partial<CreateBlogDto>): Promise<BlogEntity> {
     if (!data.slug) {
       data.slug = this.generateSlug();
     }
