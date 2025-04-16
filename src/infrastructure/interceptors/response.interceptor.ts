@@ -33,6 +33,7 @@ export class ResponseInterceptor<T>
                 status: 'error',
                 message: err.message || 'Something went wrong',
                 statusCode: err.status || HttpStatus.INTERNAL_SERVER_ERROR,
+                data: [],
               },
               err.status || HttpStatus.INTERNAL_SERVER_ERROR,
             ),
