@@ -34,6 +34,8 @@ export class ResponseInterceptor<T>
                 message: err.message || 'Something went wrong',
                 statusCode: err.status || HttpStatus.INTERNAL_SERVER_ERROR,
                 data: [],
+                timestamp: Date.now(),
+                version: 'v1',
               },
               err.status || HttpStatus.INTERNAL_SERVER_ERROR,
             ),
