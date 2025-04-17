@@ -15,7 +15,7 @@ async function bootstrap() {
     }),
   );
 
-  app.useGlobalGuards(app.get(AuthGuard));
+  app.useGlobalGuards(new AuthGuard());
   app.useGlobalInterceptors(new ResponseInterceptor());
 
   await app.listen(process.env.PORT ?? 3000);
