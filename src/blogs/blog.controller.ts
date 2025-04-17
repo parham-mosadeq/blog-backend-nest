@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { CreateBlogDto } from './dtos';
 
-@Controller('/api/v1/blogs')
+@Controller({ path: '/api/v1/blogs', version: '1' })
 export class BlogController {
   constructor(private blogService: BlogService) {}
 
