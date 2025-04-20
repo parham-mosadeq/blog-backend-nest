@@ -1,7 +1,7 @@
-import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
-import { AuthUserDto } from './dto/create-user.dto';
-import { AuthService } from './auth.service';
+import { Body, Controller, Post } from '@nestjs/common';
 import { Public } from 'src/infrastructure';
+import { AuthService } from './auth.service';
+import { AuthUserDto } from './dto/create-user.dto';
 
 @Controller({
   path: '/api/v1/auth',
@@ -13,9 +13,14 @@ export class AuthController {
   @Post('/login')
   @Public()
   async login(@Body() body: AuthUserDto) {
-    const token = await this.authService.validateUser(body);
-    if (!token) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
+    const user = await this.authService.login(body);
+    console.log(user, 'jwt');
+    return user;
+  }
+
+  @Post('/register')
+  @Public()
+  async register(@Body() body: AuthUserDto) {
+    return await this.authService.register(body);
   }
 }
