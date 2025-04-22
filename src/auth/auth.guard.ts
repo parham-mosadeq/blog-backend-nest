@@ -29,8 +29,6 @@ export class AuthGuard implements CanActivate {
     }
 
     const [type, token] = authHeader.split(' ');
-    console.log(token.length, 'token');
-    console.log(authHeader, 'authHeader');
 
     if (type !== 'Bearer' || !token) {
       throw new UnauthorizedException('Invalid or missing token');

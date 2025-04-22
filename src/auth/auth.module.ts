@@ -11,7 +11,7 @@ import { AuthEntity } from './entity';
   imports: [
     JwtModule.register({
       secret: 'helloWorld',
-      signOptions: { expiresIn: '1h' },
+      signOptions: { expiresIn: '4m' },
     }),
     TypeOrmModule.forFeature([AuthEntity]),
   ],
