@@ -23,20 +23,21 @@ export class AuthGuard implements CanActivate {
       return true;
     }
     const authHeader = request.headers.authorization;
-    console.log(authHeader, 'authHeader');
 
     if (!authHeader) {
       throw new UnauthorizedException('Token is not valid');
     }
 
     const [type, token] = authHeader.split(' ');
+    console.log(token.length, 'token');
+    console.log(authHeader, 'authHeader');
 
-    if (type !== 'Bearer' || token !== 'valid_token') {
+    if (type !== 'Bearer' || !token) {
       throw new UnauthorizedException('Invalid or missing token');
     }
 
     try {
-      const secret = process.env.JWT_SECRET || 'default_secret';
+      const secret = 'helloWorld';
       const decoded = jwt.verify(token, secret);
 
       request['user'] = decoded;

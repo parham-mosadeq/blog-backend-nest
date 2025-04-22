@@ -1,4 +1,3 @@
-import { Exclude } from 'class-transformer';
 import { IsString, MinLength } from 'class-validator';
 
 export class AuthUserDto {
@@ -7,6 +6,5 @@ export class AuthUserDto {
 
   @IsString()
   @MinLength(6, { message: 'Password must be at least 6 characters long' })
-  @Exclude()
   password: string;
 }

@@ -1,8 +1,15 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Public } from 'src/infrastructure';
 import { AuthService } from './auth.service';
 import { AuthUserDto } from './dto/create-user.dto';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller({
   path: '/api/v1/auth',
   version: '1',

@@ -9,6 +9,7 @@ import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { AuthUserDto } from './dto/create-user.dto';
 import { AuthEntity } from './entity';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,6 @@ export class AuthService {
     const user = await this.authRepo.findOne({
       where: { username: dto.username },
     });
-
     if (!user) {
       throw new NotFoundException(`Invalid username - ${dto.username}`);
     }
@@ -34,13 +34,10 @@ export class AuthService {
 
     const payload = { sub: user.id, username: user.username };
     const access_token = this.jwtService.sign(payload);
-
+    const updatedUser = plainToInstance(AuthUserDto, user);
     return {
       access_token,
-      user: {
-        id: user.id,
-        username: user.username,
-      },
+      updatedUser,
     };
   }
 
